@@ -57,6 +57,7 @@ export async function POST(req: Request) {
   if(eventType === 'user.created') { 
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
+    // Ensure all fields are toggled on in Clerk Dashboard -> Users -> 
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -66,6 +67,7 @@ export async function POST(req: Request) {
       photo: image_url,
     }
     const newUser = await createUser(user);
+
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
@@ -73,7 +75,7 @@ export async function POST(req: Request) {
         }
       })
     }
-    return NextResponse.json({ message: 'Created successfully', user: newUser })
+    return NextResponse.json({ message: 'OK', user: newUser })
   }
  
   if(eventType === 'user.updated') { 
@@ -85,13 +87,13 @@ export async function POST(req: Request) {
       photo: image_url,
     }
     const updatedUser = await updateUser(id, user);
-    return NextResponse.json({ message: 'Updated successfully', user: updatedUser })
+    return NextResponse.json({ message: 'OK', user: updatedUser })
   }
 
   if(eventType === 'user.deleted') { 
     const { id } = evt.data;
     const deletedUser = await deleteUser(id!);
-    return NextResponse.json({ message: 'Deleted successfully', user: deletedUser })
+    return NextResponse.json({ message: 'OK', user: deletedUser })
   }
   return new Response('', { status: 200 })
 }
