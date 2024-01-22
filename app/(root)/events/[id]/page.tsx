@@ -3,7 +3,7 @@
 import CheckoutButton from '@/components/shared/CheckoutButton';
 import Collections from '@/components/shared/Collection';
 import { getEventById } from '@/lib/actions/event.actions';
-import { getRelatedEventsByCategory } from '@/lib/actions/user.actions';
+import { getRelatedEventsByCategory } from '@/lib/actions/event.actions';
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types';
 import Image from 'next/image';
