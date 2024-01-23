@@ -80,4 +80,3 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
-export default createUser
